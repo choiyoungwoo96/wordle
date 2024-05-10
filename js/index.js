@@ -39,13 +39,18 @@ function appStart() {
       const 정답_글자 = 정답[i];
       if (입력한_글자 === 정답_글자) {
         맞은_갯수 += 1;
+        block.style = "animation: rotate 1s;animation-iteration-count: 1;";
+
         block.style.background = "#6aaa64";
         block.style.color = "white";
         keyboardCheck(입력한_글자);
       } else if (정답.includes(입력한_글자)) {
+        block.style = "animation: point 1s;animation-iteration-count: 1;";
         block.style.background = "#c9ba58";
         block.style.color = "white";
       } else {
+        block.style =
+          "animation: vibration 0.2s;animation-iteration-count: 10;";
         block.style.background = "#787c7e";
         block.style.color = "white";
       }
@@ -90,6 +95,32 @@ function appStart() {
     // console.log(e.keyCode, e.key);
     // 키보드 이벤트들을 보면 다양한 event의 객체들을알수 있다.
   };
+  const clickhandle = (e) => {
+    const key = e.target.innerText;
+    const keyboard = document.querySelector(".col-block").className;
+    const backspace = document.querySelector(
+      ".keyboard-backspace[data-key='BACK']"
+    );
+    const backspaceimg = document.querySelector(".keyboard-backspace > img");
+    console.log(keyboard);
+    console.log(e.target);
+    const 입력받은칸 = document.querySelector(
+      `.col-block[data-index='${attempts}${index}']`
+    );
+    if (e.target === backspace) {
+      prehandle();
+    }
+    if (index === 5) {
+      if (key === "ENTER") {
+        handleEnterKey();
+      }
+      return;
+    } else {
+      입력받은칸.innerText = key;
+      index += 1;
+    }
+  };
+
   const startTimer = () => {
     const time = new Date();
     function setTime() {
@@ -103,6 +134,7 @@ function appStart() {
     timer = setInterval(setTime, 1000);
   };
   startTimer();
+  window.addEventListener("click", clickhandle);
   window.addEventListener("keydown", handleKeydown);
 }
 appStart();

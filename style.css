@@ -76,6 +76,37 @@ footer {
 .keyboard-backspace {
   width: 75px;
 }
+@keyframes vibration {
+  from {
+    transform: rotate(-2deg);
+  }
+  to {
+    transform: rotate(2deg);
+  }
+}
 .keyboard-backspace > img {
   width: 30px;
 }
+@keyframes rotate {
+  from {
+    transform: rotateX(0);
+  }
+  to {
+    transform: rotateX(360deg);
+  }
+}
+@keyframes point {
+  0% {
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.keyboard-backspace > img {
+  width: 30px;
+}
+/* animation: vibration 0.2s;
+  animation-iteration-count: 20; */
